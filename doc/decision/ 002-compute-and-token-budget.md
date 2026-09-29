@@ -129,3 +129,6 @@ updates for stable training. Tested in Phase 6.
 
 ## Decision needed
 Confirm the 5B target (1B first milestone).
+## Decision
+Accepted: 5B-token target, with a 1B-token evaluated checkpoint as
+the first milestone. Revisit after measured PoC throughput.
