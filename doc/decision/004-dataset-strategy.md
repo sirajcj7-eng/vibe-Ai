@@ -116,5 +116,3 @@ datasets are built this way and may violate those services' terms.
 - English-only or some multilingual share
 - Whether quality-filter strength costs too much diversity
 
-## Decision needed
-Approve option A (no synthetic data) for the 50M baseline.
