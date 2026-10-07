@@ -1,0 +1,143 @@
+poc_corpus:
+  purpose: pipeline validation only; not part of the 50M training mix
+  source: Project Gutenberg
+  license_note: Public domain in the USA; Gutenberg header/footer removed. Terms outside
+    the USA may differ. Not legal advice.
+  retrieved: '2026-10-07'
+  books:
+  - id: 1342
+    title: Pride and Prejudice
+    url: https://www.gutenberg.org/cache/epub/1342/pg1342.txt
+    bytes: 737914
+  - id: 11
+    title: Alice's Adventures in Wonderland
+    url: https://www.gutenberg.org/cache/epub/11/pg11.txt
+    bytes: 151095
+  - id: 84
+    title: Frankenstein; or, the modern prometheus
+    url: https://www.gutenberg.org/cache/epub/84/pg84.txt
+    bytes: 421536
+  - id: 98
+    title: A Tale of Two Cities
+    url: https://www.gutenberg.org/cache/epub/98/pg98.txt
+    bytes: 771503
+  - id: 1661
+    title: The Adventures of Sherlock Holmes
+    url: https://www.gutenberg.org/cache/epub/1661/pg1661.txt
+    bytes: 575794
+  - id: 2701
+    title: Moby Dick; Or, The Whale
+    url: https://www.gutenberg.org/cache/epub/2701/pg2701.txt
+    bytes: 1234509
+  - id: 74
+    title: The Adventures of Tom Sawyer, Complete
+    url: https://www.gutenberg.org/cache/epub/74/pg74.txt
+    bytes: 405626
+  - id: 1260
+    title: 'Jane Eyre: An Autobiography'
+    url: https://www.gutenberg.org/cache/epub/1260/pg1260.txt
+    bytes: 1043963
+  - id: 345
+    title: Dracula
+    url: https://www.gutenberg.org/cache/epub/345/pg345.txt
+    bytes: 855074
+  - id: 1400
+    title: Great Expectations
+    url: https://www.gutenberg.org/cache/epub/1400/pg1400.txt
+    bytes: 1018009
+  - id: 2600
+    title: War and Peace
+    url: https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+    bytes: 3274124
+  - id: 174
+    title: The Picture of Dorian Gray
+    url: https://www.gutenberg.org/cache/epub/174/pg174.txt
+    bytes: 437456
+  - id: 76
+    title: Adventures of Huckleberry Finn
+    url: https://www.gutenberg.org/cache/epub/76/pg76.txt
+    bytes: 590657
+  - id: 215
+    title: The call of the wild
+    url: https://www.gutenberg.org/cache/epub/215/pg215.txt
+    bytes: 176875
+  - id: 120
+    title: Treasure Island
+    url: https://www.gutenberg.org/cache/epub/120/pg120.txt
+    bytes: 372620
+  - id: 1232
+    title: The Prince
+    url: https://www.gutenberg.org/cache/epub/1232/pg1232.txt
+    bytes: 283426
+  - id: 2554
+    title: Crime and Punishment
+    url: https://www.gutenberg.org/cache/epub/2554/pg2554.txt
+    bytes: 1159819
+  - id: 768
+    title: Wuthering Heights
+    url: https://www.gutenberg.org/cache/epub/768/pg768.txt
+    bytes: 661711
+  - id: 158
+    title: Emma
+    url: https://www.gutenberg.org/cache/epub/158/pg158.txt
+    bytes: 897480
+  - id: 161
+    title: Sense and Sensibility
+    url: https://www.gutenberg.org/cache/epub/161/pg161.txt
+    bytes: 680411
+  - id: 1080
+    title: A Modest Proposal
+    url: https://www.gutenberg.org/cache/epub/1080/pg1080.txt
+    bytes: 19512
+  - id: 5200
+    title: Metamorphosis
+    url: https://www.gutenberg.org/cache/epub/5200/pg5200.txt
+    bytes: 119757
+  - id: 35
+    title: The Time Machine
+    url: https://www.gutenberg.org/cache/epub/35/pg35.txt
+    bytes: 181475
+  - id: 36
+    title: The war of the worlds
+    url: https://www.gutenberg.org/cache/epub/36/pg36.txt
+    bytes: 340504
+  - id: 43
+    title: The strange case of Dr. Jekyll and Mr. Hyde
+    url: https://www.gutenberg.org/cache/epub/43/pg43.txt
+    bytes: 141074
+  - id: 829
+    title: Gulliver's Travels into Several Remote Nations of the World
+    url: https://www.gutenberg.org/cache/epub/829/pg829.txt
+    bytes: 584472
+  - id: 730
+    title: Oliver Twist
+    url: https://www.gutenberg.org/cache/epub/730/pg730.txt
+    bytes: 917255
+  - id: 46
+    title: A Christmas Carol in Prose; Being a Ghost Story of Christmas
+    url: https://www.gutenberg.org/cache/epub/46/pg46.txt
+    bytes: 158416
+  - id: 2591
+    title: Grimms' Fairy Tales
+    url: https://www.gutenberg.org/cache/epub/2591/pg2591.txt
+    bytes: 531096
+  - id: 514
+    title: Little Women
+    url: https://www.gutenberg.org/cache/epub/514/pg514.txt
+    bytes: 1030871
+  - id: 55
+    title: The Wonderful Wizard of Oz
+    url: https://www.gutenberg.org/cache/epub/55/pg55.txt
+    bytes: 212704
+  - id: 103
+    title: Around the World in Eighty Days
+    url: https://www.gutenberg.org/cache/epub/103/pg103.txt
+    bytes: 375959
+  - id: 164
+    title: Twenty Thousand Leagues under the Sea
+    url: https://www.gutenberg.org/cache/epub/164/pg164.txt
+    bytes: 606202
+  - id: 1952
+    title: The Yellow Wallpaper
+    url: https://www.gutenberg.org/cache/epub/1952/pg1952.txt
+    bytes: 31904
