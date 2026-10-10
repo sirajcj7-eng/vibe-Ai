@@ -1,0 +1,43 @@
+{
+  "checkpoint": "runs\\tiny-1500\\model_final.pt",
+  "n_params": 1262720,
+  "seq_len": 256,
+  "val_tokens": 926711,
+  "dataset_version": "poc-v1",
+  "results": [
+    {
+      "name": "uniform (knows nothing)",
+      "val_loss": 8.317766166719343,
+      "perplexity": 4095.999999999997,
+      "bits_per_byte": 3.578109580798826
+    },
+    {
+      "name": "unigram",
+      "val_loss": 6.518916076419282,
+      "perplexity": 677.8432567098108,
+      "bits_per_byte": 2.804286103014991
+    },
+    {
+      "name": "bigram (lam=0.9)",
+      "val_loss": 4.707878159669778,
+      "perplexity": 110.81677476720569,
+      "bits_per_byte": 2.0252197057124084
+    },
+    {
+      "name": "transformer",
+      "val_loss": 4.025539362325078,
+      "perplexity": 56.01051059527521,
+      "bits_per_byte": 1.731693422429937
+    }
+  ],
+  "env": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 61 Stepping 4, GenuineIntel",
+    "python": "3.11.7",
+    "torch": "2.14.1+cpu",
+    "torch_threads": 2,
+    "cuda_available": false
+  },
+  "train_steps": 1500,
+  "train_tokens_seen": 6144000
+}

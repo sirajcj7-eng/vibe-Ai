@@ -1,0 +1,11 @@
+# Fixed qualitative prompts. Same set for every checkpoint. Lines starting with # are ignored.
+The old man walked slowly down the road and
+It was a dark and stormy night, and
+She opened the letter and read
+The captain looked out at the sea and said
+Once upon a time there was a
+In the year 1850,
+"Where are you going?" asked
+The house was silent except for
+He had never seen anything so
+The doctor came into the room and
