@@ -49,8 +49,19 @@ def main() -> int:
         "vocab_size": tok.get_vocab_size(),
         "dtype": "uint16",
         "split_rule": "sorted by book id; every 5th book (index % 5 == 0) is validation",
-        "train": {"documents": len(train_files), "tokens": int(len(train_tokens)), "shards": train_names},
-        "val": {"documents": len(val_files), "tokens": int(len(val_tokens)), "shards": val_names},
+            
+         "train": {
+            "documents": len(train_files),
+            "tokens": int(len(train_tokens)),
+            "bytes": sum(f.stat().st_size for f in train_files),
+            "shards": train_names,
+        },
+        "val": {
+            "documents": len(val_files),
+            "tokens": int(len(val_tokens)),
+            "bytes": sum(f.stat().st_size for f in val_files),
+            "shards": val_names,
+        },
     }
     (args.out / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
