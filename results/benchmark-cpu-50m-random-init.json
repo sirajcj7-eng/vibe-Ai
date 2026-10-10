@@ -1,0 +1,77 @@
+{
+  "label": "50m-random-init",
+  "n_params": 50348544,
+  "precision": "fp32",
+  "threads": {
+    "1": {
+      "prefill": {
+        "128": {
+          "seconds": 0.2478902000002563,
+          "tokens_per_s": 516.3576454408752
+        },
+        "512": {
+          "seconds": 1.0474211999680847,
+          "tokens_per_s": 488.81958854336807
+        }
+      },
+      "decode": {
+        "16": 28.367401099182253,
+        "512": 22.25575732892932,
+        "1024": 16.700875628813293
+      }
+    },
+    "2": {
+      "prefill": {
+        "128": {
+          "seconds": 0.20190449990332127,
+          "tokens_per_s": 633.9630868122838
+        },
+        "512": {
+          "seconds": 0.7914433998521417,
+          "tokens_per_s": 646.9192870843984
+        }
+      },
+      "decode": {
+        "16": 27.588984839530234,
+        "512": 22.81910340067512,
+        "1024": 17.675542441012563
+      }
+    },
+    "4": {
+      "prefill": {
+        "128": {
+          "seconds": 0.20832449989393353,
+          "tokens_per_s": 614.4260519774199
+        },
+        "512": {
+          "seconds": 0.736957399873063,
+          "tokens_per_s": 694.7484346967535
+        }
+      },
+      "decode": {
+        "16": 23.95209580611245,
+        "512": 19.138131015914826,
+        "1024": 15.433009743414738
+      }
+    }
+  },
+  "memory": {
+    "baseline_process_mb": 201.05216,
+    "after_model_load_mb": 406.65088,
+    "full_context_prefill_seconds": 3.9739573001861572,
+    "kv_cache_fp32_mib_measured": 32.0,
+    "kv_cache_fp32_mib_formula": 32.0,
+    "peak_process_mb": 690.548736
+  },
+  "env": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 61 Stepping 4, GenuineIntel",
+    "python": "3.11.7",
+    "torch": "2.14.1+cpu",
+    "torch_threads": 2,
+    "cuda_available": false,
+    "logical_cpus": 4,
+    "physical_cpus": 2,
+    "total_ram_mb": 8473.088
+  }
+}
