@@ -60,7 +60,7 @@ def run_case(model, optimizer, scaler, batch, seq, steps, warmup, precision, dev
     return {
         "tok_per_s": batch * seq * steps / dt,
         "peak_gib": torch.cuda.max_memory_allocated() / 2**30,
-        "loss": float(loss),
+       "loss": float(loss.detach()),
     }
 
 
