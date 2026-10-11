@@ -132,3 +132,30 @@ Confirm the 5B target (1B first milestone).
 ## Decision
 Accepted: 5B-token target, with a 1B-token evaluated checkpoint as
 the first milestone. Revisit after measured PoC throughput.
+## Measured GPU throughput (Phase 6.9)
+
+Hardware: Kaggle, Tesla T4 (14.6 GiB), one of two GPUs used, PyTorch
+2.11 + CUDA 12.8, fp16 with GradScaler. 50M model, random tokens, same
+optimizer path as scripts/train.py.
+
+| Sequence | Micro-batch | Tokens/s | Peak GPU memory |
+|---|---|---|---|
+| 512 | 2 | 14,599 | 1.30 GiB |
+| 512 | 4 | 18,508 | 1.93 GiB |
+| 512 | 8 | 21,233 | 3.16 GiB |
+| 512 | 16 | 22,938 | 5.61 GiB |
+| 1024 | 2 | 17,317 | 1.94 GiB |
+| 1024 | 4 | 19,641 | 3.17 GiB |
+| 1024 | 8 | 20,795 | 5.61 GiB |
+| 1024 | 16 | 21,032 | 10.52 GiB |
+| 2048 | 2 | 16,941 | 3.18 GiB |
+| 2048 | 4 | 17,850 | 5.62 GiB |
+
+(Sequence 2048 with batch 8 and 16 was not captured: output was cut off.)
+
+Result: at the real context length (2,048), 17,850 tokens/s. That
+matches the 17,000 tokens/s assumed above (about 7.3 TFLOPs effective).
+- 1B tokens: about 15.6 GPU-hours. 5B tokens: about 77.8 GPU-hours.
+- 262,144-token steps need gradient accumulation 32 at micro-batch 4.
+- Open: training on both T4s (data-parallel) could nearly double speed;
+  verify how Kaggle counts quota before relying on it.
