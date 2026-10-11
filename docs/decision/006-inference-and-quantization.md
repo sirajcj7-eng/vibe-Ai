@@ -1,4 +1,4 @@
-# 006: Inference and Quantization
+ii# 006: Inference and Quantization
 
 Status: **Proposed**. Two decisions need approval (see the end).
 All speed numbers are estimates from first principles and are
@@ -168,3 +168,29 @@ bounds ignore KV cache and overheads; real numbers will be lower.
 ## Decision
 Accepted: Llama-compatible architecture, PyTorch reference plus
 GGUF/llama.cpp for distribution, INT8 default, INT4 experimental.
+## Measured baseline: PyTorch FP32 on CPU (Phase 6.8)
+
+Hardware: laptop, 4 logical CPUs (PyTorch default 2 threads), Windows,
+Python 3.11.7. Random-init 50M model, FP32, no quantization.
+Raw data: results/benchmark-cpu-50m-random-init.json
+
+| Measurement | Earlier estimate | Measured |
+|---|---|---|
+| Weights in memory | 201.4 MB | 201.4 MB |
+| KV cache at 2,048 tokens (FP32) | 32 MiB | 32.00 MiB (matches formula) |
+| Prefill, 128 tokens | about 1-2 s | 0.20 s (2 threads) |
+| Prefill, 512 tokens | - | 0.79 s |
+| Prefill, 2,048 tokens | 1.6-4.8 s | 3.97 s |
+| Decode, context 16 | 5-25 tok/s (FP32) | 27.6 tok/s (2 threads), 28.4 (1 thread) |
+| Decode, context 1,024 | - | 17.7 tok/s |
+| Peak process memory | 600-800 MB | 691 MB |
+
+Observations:
+- Decode is memory-bandwidth/overhead bound: 1-2 threads is fastest,
+  4 threads is slower.
+- Decode slows with context because the reference KV cache is extended
+  by copying. A production runtime avoids this.
+- Peak memory is 3.4x the weight size (PyTorch baseline about 200 MB).
+- Time-to-first-token target (under 1 s) already met in FP32. The
+  decode (100+ tok/s) and memory (under 250 MB) targets still need
+  INT8 plus a lightweight runtime (Phase 8).
