@@ -53,6 +53,22 @@ availability is higher.
 - Interleave and shuffle into 100M-token shards so that any prefix
   (for example the first 1B tokens) approximates the full mix.
 
+## Verified dataset names (Hugging Face, org `common-pile`)
+- Raw: 30 datasets, e.g. cccc, stackexchange, wikimedia, peS2o, stackv2,
+  pre_1929_books, project_gutenberg, library_of_congress, libretexts,
+  oercommons, pressbooks, doab, news, youtube, pubmed, arxiv_papers,
+  arxiv_abstracts, ubuntu_irc, github_archive.
+- Filtered: same names with the suffix `_filtered` (31 items; the Stack v2
+  split is resolved at run time). The sampler prefers `_filtered` and
+  reports when it falls back to a raw dataset.
+- Files are gzipped JSON shards (about 800 MB each) with fields id, text,
+  source, added, metadata. Some documents are 16M characters long.
+- Card caveats: some cards list effective (post-repeat) token counts, so we
+  count our own. The public filtered cccc may differ from the exact version
+  Comma used. Every card warns about license laundering.
+- Revisions are pinned in data/manifest.yaml (section common_pile).
+
+
 ## Known weaknesses
 - Weaker on everyday commonsense and casual chat than web-trained models
   (published HellaSwag/PIQA/CommonsenseQA results); stronger on science.
