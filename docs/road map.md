@@ -56,3 +56,11 @@ failures are all published in this repo.
   dataset version, training tokens, context length, training
   config, compute, duration, validation loss, eval results,
   inference speed, memory, qualitative examples, failure modes.
+## Status log
+- Phases 0-5 (design): done (docs 001-006, SPEC.md).
+- Phase 6 (proof-of-concept): done. Pipeline, tests, exact resume, CPU and
+  GPU benchmarks, ablations (doc 007). Exit criteria met.
+- Phase 7 is split into: 7a real dataset sources and licenses; 7b data
+  pipeline at scale; 7c real 16k tokenizer and vocabulary ablation; 7d
+  multi-session training setup on Kaggle (checkpoints, both GPUs);
+  7e 50M learning-rate check, then the 1B-token and 5B-token runs.
