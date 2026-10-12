@@ -88,3 +88,21 @@ availability is higher.
 - https://huggingface.co/datasets/common-pile/comma_v0.1_training_dataset
 - https://blog.eleuther.ai/common-pile/
 - https://huggingface.co/common-pile
+
+
+## Findings from the first sampling run (7b.1, 2026-10-11)
+- All 21 sources resolved to `_filtered` datasets and streamed correctly.
+- 20 of 21 sources carry a per-document license field: CC BY, CC BY-SA,
+  CC0, public domain, MIT, Apache-2.0, BSD-2/3-Clause, Unlicense. No NC or
+  ND values in the 300-document samples.
+- cccc has no per-document license; its provenance is the domain-level
+  verification on its dataset card (537 domains). Kept, caveat recorded.
+- arxiv_abstracts: the `license` field (CC0) is the abstract's license.
+  `full_text_license` describes the full paper and is ignored.
+- peS2o stores its license in `oa_license`. stackv2_edu: use `license`
+  (`gha_license_id` is often missing). github_archive license strings
+  differ in case and are normalized.
+- wikimedia: the sample was mostly Wiktionary-style stubs with broken
+  template text (median 173 characters). Needs a project filter and a
+  minimum length. Pending the 7b.2 audit.
+- Each sample came from a single shard, so sizes are not representative.
