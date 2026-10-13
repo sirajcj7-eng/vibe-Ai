@@ -106,3 +106,37 @@ availability is higher.
   template text (median 173 characters). Needs a project filter and a
   minimum length. Pending the 7b.2 audit.
 - Each sample came from a single shard, so sizes are not representative.
+
+## Audit findings (7b.2, 2026-10-12)
+Sampled about 3,990 documents across 21 sources and many shards each.
+- Licenses: 6 documents (0.15%) fail the allow-list (1 WTFPL, 5 Stack v2
+  files with empty, BSD-4-Clause, BSD-2-Clause-Views or UPL-1.0+ values).
+  They are dropped. No NC or ND values anywhere. arxiv_abstracts: the
+  `license` field (CC0) is used, not `full_text_license`.
+- wikimedia is a mixture: about 10% Wiktionary, only 62% namespace 0,
+  31% under 500 characters. Keep wikipedia.com + namespace 0 only.
+- Documents are ordered inside shards (one book, one Stack Exchange
+  site, one programming language per shard). The builder samples
+  uniformly across shards and enforces per-stratum limits.
+- Short or noisy: github_archive (32% under 500 characters), ubuntu_irc
+  (14%), OER sources (10-13%). A 500-character minimum applies.
+- No replacement-character corruption in any source.
+
+## Filter rules v1 (implemented in src/vibe/filters.py)
+License allow-list (cccc verified by domain); minimum 500 characters (300
+for abstracts and code); no replacement characters; letters at least 50%
+for prose sources; English Wikipedia articles only; drop generated and
+vendored code; Stack Overflow at most 35% of the Stack Exchange budget;
+code language targets Python 28, JavaScript 14, TypeScript 8, Java 8,
+C 7, C++ 7, Go 5, Rust 5, SQL 4, PHP 4, C# 3, Ruby 2, Shell 2,
+Markdown 2, Swift 1 (percent; names verified in the next scan).
+
+## Revisions seen in the audit (first 10 characters of the commit)
+cccc 03a3de5713, youtube dff8c8a54e, libretexts 70388bca52, oercommons
+506b6159da, pressbooks 1a1d3b50d7, doab defb24ca72, news 59aaa8f104,
+foodista bf2c7aaa2d, public_domain_review efc7f21259, stackexchange
+c0ac737383, github_archive 52282fe966, ubuntu_irc 84f88c9865, wikimedia
+0641bb84bd, pes2o 297747513b, arxiv_papers 033cf7f53f, arxiv_abstracts
+dc1ceab475, pubmed c156f0569a, stackv2_edu c354dbe884, pre_1929_books
+23f9d96dbb, project_gutenberg 3cdf6879c8, library_of_congress 56725c7aa1.
+The builder records the full hashes in the corpus metadata.
