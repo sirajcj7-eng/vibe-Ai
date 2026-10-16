@@ -1,11 +1,13 @@
 import hashlib
+import io
+import json
 
 import numpy as np
 import pytest
 
 from vibe.corpus import (
-    StratumBudget, TokenShardWriter, doc_key, encode_documents, is_val_doc,
-    process_documents,
+    StratumBudget, TokenShardWriter, collect_text, doc_key, encode_documents,
+    is_val_doc, process_documents,
 )
 from vibe.data import TOKEN_DTYPE, TokenStream
 from vibe.tokenizer import train_tokenizer
@@ -137,3 +139,37 @@ def test_process_caps_a_dominant_stratum(tok, tmp_path):
     assert so <= 0.35 * 6000 + doc_tokens
     assert diy > so
     assert res.drops["stratum_full"] > 0
+
+    def test_collect_text_filters_stops_and_skips_validation_documents():
+      val_id = next(f"v{i}" for i in range(100_000) if is_val_doc(f"v{i}"))
+      docs = [make_doc(0), make_doc(1, license="GPL-3.0"), make_doc(2, text="short"),
+            {**make_doc(3), "id": val_id}, make_doc(4), make_doc(5), make_doc(6), make_doc(7)]
+      out = io.StringIO()
+      kept, chars, drops = collect_text("news", docs, 2000, out)
+      lines = out.getvalue().splitlines()
+      assert drops["license"] == 1 and drops["short"] == 1 and drops["val_holdout"] == 1
+      assert kept == len(lines) == 3 and chars == 3 * len(GOOD)  # stops at 2,000 characters
+      assert json.loads(lines[0])["text"] == GOOD
+
+
+      def test_collect_text_filters_stops_and_skips_validation_documents():import   io
+    import json
+
+    from vibe.corpus import collect_text
+
+    non_val = [k for k in (f"n{i}" for i in range(1000)) if not is_val_doc(k)]
+    val_id = next(f"v{i}" for i in range(100_000) if is_val_doc(f"v{i}"))
+
+    def doc(i, **kw):
+        d = make_doc(i, **kw)
+        d["id"] = non_val[i]
+        return d
+
+    docs = [doc(0), doc(1, license="GPL-3.0"), doc(2, text="short"),
+            {**doc(3), "id": val_id}, doc(4), doc(5), doc(6), doc(7)]
+    out = io.StringIO()
+    kept, chars, drops = collect_text("news", docs, 2000, out)
+    lines = out.getvalue().splitlines()
+    assert drops["license"] == 1 and drops["short"] == 1 and drops["val_holdout"] == 1
+    assert kept == len(lines) == 3 and chars == 3 * len(GOOD)  # stops at 2,000 characters
+    assert json.loads(lines[0])["text"] == GOOD

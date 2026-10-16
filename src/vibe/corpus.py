@@ -3,6 +3,7 @@ writer and the filter -> tokenize -> write pipeline."""
 from __future__ import annotations
 
 import hashlib
+import json
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -207,3 +208,28 @@ def process_documents(
     flush()
     res.reached_budget = budget.done
     return res
+
+
+def collect_text(source: str, docs: Iterable[dict], quota_chars: int, out) -> tuple:
+    """Write passing documents as JSON lines until quota_chars is reached.
+
+    Documents that fall in the validation split are skipped, so no held-out
+    text is used to build the tokenizer. Returns (documents, characters, drops).
+    """
+    drops: Counter = Counter()
+    kept = chars = 0
+    for doc in docs:
+        text = doc.get("text") or ""
+        ok, reason = check_document(source, text, doc.get("metadata"))
+        if not ok:
+            drops[reason] += 1
+            continue
+        if is_val_doc(doc_key(doc)):
+            drops["val_holdout"] += 1
+            continue
+        out.write(json.dumps({"text": text.replace("\r\n", "\n")}, ensure_ascii=False) + "\n")
+        kept += 1
+        chars += len(text)
+        if chars >= quota_chars:
+            break
+    return kept, chars, drops

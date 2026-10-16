@@ -1,4 +1,4 @@
-"""Document filters for the real training corpus (doc 008, Phase 7b.3)."""
+"""Document filters for the real training corpus (doc 008, Phase 7b)."""
 from __future__ import annotations
 
 from vibe.licenses import LICENSE_FIELD, SOURCE_LEVEL_LICENSE, doc_license_status
@@ -17,11 +17,20 @@ MIN_ALPHA_RATIO = 0.5
 # Maximum share of a source's token budget that one stratum may use.
 STRATA_CAPS = {"stackexchange": {"stackoverflow.com": 0.35}}
 
-# Target share of the code budget per language (Stack v2 metadata names;
-# verified against the real data in the next scan).
+# English Stack Exchange sites kept (the filtered dataset has 13 sites; the
+# non-English Stack Overflow sites and the meta sites are dropped).
+SE_ALLOWED_SITES = frozenset({
+    "stackoverflow.com", "math.stackexchange.com", "superuser.com",
+    "unix.stackexchange.com", "diy.stackexchange.com", "blender.stackexchange.com",
+    "islam.stackexchange.com", "sitecore.stackexchange.com",
+})
+SE_MAX_SHARE = {"stackoverflow.com": 0.35}
+
+# Target share of the code budget per language (Stack v2 names, confirmed by
+# the shard inventory: 14 languages, no SQL).
 CODE_LANGUAGE_TARGETS = {
-    "Python": 0.28, "JavaScript": 0.14, "TypeScript": 0.08, "Java": 0.08,
-    "C": 0.07, "C++": 0.07, "Go": 0.05, "Rust": 0.05, "SQL": 0.04, "PHP": 0.04,
+    "Python": 0.32, "JavaScript": 0.14, "TypeScript": 0.08, "Java": 0.08,
+    "C": 0.07, "C++": 0.07, "Go": 0.05, "Rust": 0.05, "PHP": 0.04,
     "C#": 0.03, "Ruby": 0.02, "Shell": 0.02, "Markdown": 0.02, "Swift": 0.01,
 }
 
@@ -53,6 +62,8 @@ def check_document(source: str, text: str | None, meta) -> tuple[bool, str]:
     if source == "wikimedia":
         if meta.get("wiki") != "wikipedia.com" or str(meta.get("namespace")) != "0":
             return False, "wiki_filter"
+    if source == "stackexchange" and meta.get("site") not in SE_ALLOWED_SITES:
+        return False, "site_excluded"
     if source == "stackv2_edu" and (_truthy(meta.get("is_generated")) or _truthy(meta.get("is_vendor"))):
         return False, "generated_or_vendor"
     return True, "ok"

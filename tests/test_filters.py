@@ -41,7 +41,7 @@ def test_replacement_character_and_alpha_ratio():
     assert check_document("news", LONG + "\ufffd", meta()) == (False, "replacement_char")
     digits = "1234567890 " * 100
     assert check_document("news", digits, meta()) == (False, "low_alpha")
-    assert check_document("stackexchange", digits, meta()) == (True, "ok")  # exempt
+    assert check_document("stackexchange", digits, meta(site="stackoverflow.com")) == (True, "ok")  # exempt
 
 
 def test_wikimedia_keeps_only_wikipedia_articles():
@@ -64,3 +64,9 @@ def test_strata_and_tables():
     assert stratum("news", {"site": "x"}) is None and stratum("news", None) is None
     assert STRATA_CAPS["stackexchange"]["stackoverflow.com"] == 0.35
     assert sum(CODE_LANGUAGE_TARGETS.values()) == pytest.approx(1.0)
+def test_stackexchange_site_filter_and_code_targets():
+    assert check_document("stackexchange", LONG, meta(site="math.stackexchange.com")) == (True, "ok")
+    assert check_document("stackexchange", LONG, meta(site="es.stackoverflow.com")) == (False, "site_excluded")
+    assert check_document("stackexchange", LONG, meta(site="meta.stackoverflow.com")) == (False, "site_excluded")
+    assert "SQL" not in CODE_LANGUAGE_TARGETS
+    assert CODE_LANGUAGE_TARGETS["Python"] == pytest.approx(0.32)

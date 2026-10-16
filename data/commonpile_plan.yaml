@@ -1,0 +1,24 @@
+# Pinned Common Pile revisions and shard inventory (Phase 7b.4, plan_shards.py).
+# est_tokens_b is a rough estimate (gzip x3, 3.6 bytes per token), not a count.
+sources:
+  cccc: {repo: common-pile/cccc_filtered, revision: "03a3de5713a0bb23267d26724346508af0f25327", shards: 53, files_gb: 21.5, est_tokens_b: 17.9}
+  youtube: {repo: common-pile/youtube_filtered, revision: "dff8c8a54e98bce64c2e7ce9a8466c144c1cddd6", shards: 9, files_gb: 6.9, est_tokens_b: 5.8}
+  libretexts: {repo: common-pile/libretexts_filtered, revision: "70388bca52b4a93515e14b1d56618fd7944988fd", shards: 1, files_gb: 0.1, est_tokens_b: 0.1}
+  oercommons: {repo: common-pile/oercommons_filtered, revision: "506b6159dadcbc0dc67611cea024eedb04232fb2", shards: 1, files_gb: 0.0, est_tokens_b: 0.0}
+  pressbooks: {repo: common-pile/pressbooks_filtered, revision: "1a1d3b50d77f834370f8eb4c0d174668dd1676bb", shards: 1, files_gb: 0.2, est_tokens_b: 0.2}
+  doab: {repo: common-pile/doab_filtered, revision: "defb24ca72ef6aba6ce0228b669eec06dcfbffbc", shards: 5, files_gb: 3.3, est_tokens_b: 2.8}
+  news: {repo: common-pile/news_filtered, revision: "59aaa8f104e189e6fb8033f0ed319c5c343a03b1", shards: 1, files_gb: 0.1, est_tokens_b: 0.1}
+  foodista: {repo: common-pile/foodista_filtered, revision: "bf2c7aaa2d32be1e7d4d4779a6017407236831de", shards: 1, files_gb: 0.0, est_tokens_b: 0.0}
+  public_domain_review: {repo: common-pile/public_domain_review_filtered, revision: "efc7f21259d069a27d6ca3655f74fda969f82b01", shards: 1, files_gb: 0.0, est_tokens_b: 0.0}
+  stackexchange: {repo: common-pile/stackexchange_filtered, revision: "c0ac7373830c688a43fc12d1988c4b19ccd884ab", shards: 44, files_gb: 34.9, est_tokens_b: 29.1}
+  github_archive: {repo: common-pile/github_archive_filtered, revision: "52282fe96670254bdc0d44dd718ee7a27210ee85", shards: 19, files_gb: 15.1, est_tokens_b: 12.6}
+  ubuntu_irc: {repo: common-pile/ubuntu_irc_filtered, revision: "84f88c986584f11d672befab542fa4d5123f3e8f", shards: 3, files_gb: 1.8, est_tokens_b: 1.5}
+  wikimedia: {repo: common-pile/wikimedia_filtered, revision: "0641bb84bd9b7162bcddf8be7836822161a9a342", shards: 35, files_gb: 21.6, est_tokens_b: 18.0}
+  pes2o: {repo: common-pile/pes2o_filtered, revision: "297747513bfb0ff1fbf61ddad3b03319d0f04597", shards: 91, files_gb: 56.9, est_tokens_b: 47.4}
+  arxiv_papers: {repo: common-pile/arxiv_papers_filtered, revision: "033cf7f53f9b348deec868c1a5a48484f3ee9e52", shards: 8, files_gb: 6.0, est_tokens_b: 5.0}
+  arxiv_abstracts: {repo: common-pile/arxiv_abstracts_filtered, revision: "dc1ceab4755eb037ec61e49cf1350dab7ceee6e7", shards: 2, files_gb: 1.1, est_tokens_b: 0.9}
+  pubmed: {repo: common-pile/pubmed_filtered, revision: "c156f0569a92d8f2edc33cebe1f72f7d3e1cae84", shards: 17, files_gb: 43.6, est_tokens_b: 36.3}
+  stackv2_edu: {repo: common-pile/stackv2_edu_filtered, revision: "c354dbe88469a1153e97c6a63ac50591849654de", shards: 95, files_gb: 83.0, est_tokens_b: 69.2}
+  pre_1929_books: {repo: common-pile/pre_1929_books_filtered, revision: "23f9d96dbb1db3324bbc9fbfe1f8299cc799c4d1", shards: 26, files_gb: 16.6, est_tokens_b: 13.8}
+  project_gutenberg: {repo: common-pile/project_gutenberg_filtered, revision: "3cdf6879c807f4e4e063f2ceb23bc268d8c29ab7", shards: 15, files_gb: 7.6, est_tokens_b: 6.4}
+  library_of_congress: {repo: common-pile/library_of_congress_filtered, revision: "56725c7aa1bb320703e22eb5f42903173d5bac3d", shards: 25, files_gb: 12.8, est_tokens_b: 10.7}

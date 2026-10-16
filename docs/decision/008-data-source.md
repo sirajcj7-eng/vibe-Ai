@@ -171,3 +171,24 @@ Design decisions
   attribution, and redistributing derived data adds obligations. The
   repo publishes the recipe (manifest, pinned revisions, filters,
   scripts) so anyone can rebuild it.
+## Shard inventory findings (7b.4)
+- All 21 datasets are unchanged since the audit. Full revision hashes are
+  pinned in data/commonpile_plan.yaml.
+- Coverage (rough available tokens / tokens needed): 19x to 726x for 15
+  sources. LOW for libretexts, oercommons, pressbooks, news, foodista and
+  public_domain_review: single small shards, about 0.3B tokens together.
+- Rollover rule: a source is capped at about half its estimated
+  availability; the shortfall moves to the other sources of its group in
+  proportion to their shares. Group totals do not change.
+- stackv2_edu: 14 languages in 95 shards, one language per shard:
+  Markdown 18, JavaScript 15, Java 12, Python 12, C++ 8, PHP 8, C# 6,
+  Go 4, TypeScript 4, C 2, Shell 2, Swift 2, Ruby 1, Rust 1. There is no
+  SQL. Its 4% moved to Python (now 32%). SQL and HTML/CSS data for EVY
+  Code must come from elsewhere later.
+- stackexchange: only 13 sites in 44 shards (31 are stackoverflow.com).
+  Kept: stackoverflow.com (35% cap), math, superuser, unix, diy, blender,
+  islam, sitecore. Dropped: es/pt/ru stackoverflow (non-English) and the
+  two meta sites. The other kept sites share the remaining 65% in
+  proportion to their shards.
+- Reads: each source's quota is split equally over up to 24 random
+  shards, each read from its start. Caps are enforced by per-shard quotas.
