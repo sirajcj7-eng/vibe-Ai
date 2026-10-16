@@ -140,3 +140,34 @@ c0ac737383, github_archive 52282fe966, ubuntu_irc 84f88c9865, wikimedia
 dc1ceab475, pubmed c156f0569a, stackv2_edu c354dbe884, pre_1929_books
 23f9d96dbb, project_gutenberg 3cdf6879c8, library_of_congress 56725c7aa1.
 The builder records the full hashes in the corpus metadata.
+## Build plan (Phase 7b.4 onward)
+1. Shard inventory and stratum probe (plan_shards.py): shard counts,
+   approximate token availability, which Stack v2 shard holds which
+   language and which StackExchange shard holds which site, full revision
+   hashes.
+2. Pilot build at 1% scale (about 50M tokens) to validate the pipeline and
+   measure throughput.
+3. Real 16k tokenizer trained on a sample of the mix, with a per-domain
+   compression report.
+4. Contamination blocklist (13-grams from our eval sets).
+5. Full build: stream, filter, tokenize, write per-source uint16 shards
+   (train, and per-source validation). Each finished source is uploaded
+   to a private Hugging Face dataset repo so a dead session can resume.
+6. Verify (tokens per source and group, validation split, loader dry run)
+   and write meta.json.
+
+Design decisions
+- No pre-interleaved shards. The training loader permutes all training
+  windows without replacement every epoch, so the first 1B tokens of a
+  run are a random 20% sample of the whole corpus. This replaces the
+  "interleave into prefix-stable shards" line above.
+- Validation: about 0.5% of documents, chosen by a hash of the document
+  id, written per source so per-domain loss can be reported.
+- Budgets count tokens of our own 16k tokenizer. A stratum cap can
+  overshoot by at most one document.
+- Storage: free Hugging Face accounts include 100 GB of private storage
+  (checked 2026-10-14). The corpus is about 10 GB of uint16 tokens.
+- The tokenized corpus stays private. Many sources are CC BY-SA or need
+  attribution, and redistributing derived data adds obligations. The
+  repo publishes the recipe (manifest, pinned revisions, filters,
+  scripts) so anyone can rebuild it.
